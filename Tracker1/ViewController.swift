@@ -47,4 +47,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         node.geometry?.firstMaterial?.fillMode = .lines
         return node
     }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        if let faceAnchor = anchor as? ARFaceAnchor,
+           let faceGeometry = node.geometry as? ARSCNFaceGeometry {
+            faceGeometry.update(from: faceAnchor.geometry)
+        }
+    }
 }
